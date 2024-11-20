@@ -1,0 +1,7 @@
+# Ignore .env file containing sensitive credentials
+.env
+
+# Other default files to ignore
+node_modules/
+dist/
+*.log
