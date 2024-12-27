@@ -11,8 +11,10 @@ import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {  useRegisterUserMutation, useLoginUserMutation } from "../features/api/authApi";
+import { toast } from "sonner"
+
 
 const Login = () => {
   const [signUpInput, setSignUpInput] = useState({
@@ -50,6 +52,31 @@ const Login = () => {
     }
   };
 
+  useEffect(()=>{
+    if(registerIsSuccess && registerData){
+      toast.success(registerData.message || "Signup is successful!")
+     
+      
+    }
+    if(loginIsSuccess && loginData){
+      toast.success(loginData.message || "Login is successful!")
+    }
+    if(registerError){
+      toast.error(registerError.data.massage || "Signup Failed!")
+    }
+    if(loginError){
+      toast.error(loginError.data.massage || "Login Failed!")
+    }
+  },[
+    registerIsSuccess,
+    registerData,
+    loginIsSuccess,
+    loginData,
+    registerError,
+    loginError,
+
+  ])
+
   const handleRegistration = async (type) => {
     const inputData = type === "signup" ? signUpInput : loginInput;
     const action = type === "signup" ? registerUser : loginUser;
@@ -57,7 +84,7 @@ const Login = () => {
     // console.log(inputData);
   };
   return (
-    <div className="flex items-center w-full justify-center">
+    <div className="flex items-center w-full justify-center mt-20">
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
