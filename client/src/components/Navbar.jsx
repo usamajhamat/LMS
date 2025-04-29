@@ -25,7 +25,7 @@ const Navbar = () => {
       <School size={"30"} />
      
         <h1 className="hidden md:block font-extrabold text-2xl">
-          E-Learning Platform
+          E-Learning 
         </h1>
     </div>
     {/* Dropdoen & Dark theme icon */}
